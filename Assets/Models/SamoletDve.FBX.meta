@@ -1,0 +1,245 @@
+fileFormatVersion: 2
+guid: 6656d7e6e5e493f44bd415a5bed7b83c
+timeCreated: 1457707145
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Box01
+    100002: Box02
+    100004: Box03
+    100006: Box04
+    100008: Box05
+    100010: Box06
+    100012: Box07
+    100014: Box08
+    100016: Box09
+    100018: Box10
+    100020: Box11
+    100022: Box12
+    100024: Box13
+    100026: ChamferBox01
+    100028: ChamferCyl01
+    100030: ChamferCyl02
+    100032: ChamferCyl03
+    100034: CHROME
+    100036: Cylinder03
+    100038: Cylinder05
+    100040: Cylinder06
+    100042: Cylinder07
+    100044: Group01
+    100046: Group01 1
+    100048: Loft03
+    100050: //RootNode
+    100052: Sphere01
+    100054: Sphere010
+    100056: Sphere012
+    100058: Sphere014
+    100060: Sphere015
+    100062: Sphere016
+    100064: Sphere02
+    100066: Sphere02 1
+    100068: Sphere03
+    100070: Sphere09
+    100072: Sphere12
+    100074: Sphere13
+    400000: Box01
+    400002: Box02
+    400004: Box03
+    400006: Box04
+    400008: Box05
+    400010: Box06
+    400012: Box07
+    400014: Box08
+    400016: Box09
+    400018: Box10
+    400020: Box11
+    400022: Box12
+    400024: Box13
+    400026: ChamferBox01
+    400028: ChamferCyl01
+    400030: ChamferCyl02
+    400032: ChamferCyl03
+    400034: CHROME
+    400036: Cylinder03
+    400038: Cylinder05
+    400040: Cylinder06
+    400042: Cylinder07
+    400044: Group01
+    400046: Group01 1
+    400048: Loft03
+    400050: //RootNode
+    400052: Sphere01
+    400054: Sphere010
+    400056: Sphere012
+    400058: Sphere014
+    400060: Sphere015
+    400062: Sphere016
+    400064: Sphere02
+    400066: Sphere02 1
+    400068: Sphere03
+    400070: Sphere09
+    400072: Sphere12
+    400074: Sphere13
+    2300000: Box01
+    2300002: Box02
+    2300004: Box03
+    2300006: Box04
+    2300008: Box05
+    2300010: Box06
+    2300012: Box07
+    2300014: Box08
+    2300016: Box09
+    2300018: Box10
+    2300020: Box11
+    2300022: Box12
+    2300024: Box13
+    2300026: ChamferBox01
+    2300028: ChamferCyl01
+    2300030: ChamferCyl02
+    2300032: ChamferCyl03
+    2300034: Cylinder03
+    2300036: Cylinder05
+    2300038: Cylinder06
+    2300040: Cylinder07
+    2300042: Loft03
+    2300044: Sphere01
+    2300046: Sphere010
+    2300048: Sphere012
+    2300050: Sphere014
+    2300052: Sphere015
+    2300054: Sphere016
+    2300056: Sphere02
+    2300058: Sphere02 1
+    2300060: Sphere03
+    2300062: Sphere12
+    2300064: Sphere13
+    3300000: Box01
+    3300002: Box02
+    3300004: Box03
+    3300006: Box04
+    3300008: Box05
+    3300010: Box06
+    3300012: Box07
+    3300014: Box08
+    3300016: Box09
+    3300018: Box10
+    3300020: Box11
+    3300022: Box12
+    3300024: Box13
+    3300026: ChamferBox01
+    3300028: ChamferCyl01
+    3300030: ChamferCyl02
+    3300032: ChamferCyl03
+    3300034: Cylinder03
+    3300036: Cylinder05
+    3300038: Cylinder06
+    3300040: Cylinder07
+    3300042: Loft03
+    3300044: Sphere01
+    3300046: Sphere010
+    3300048: Sphere012
+    3300050: Sphere014
+    3300052: Sphere015
+    3300054: Sphere016
+    3300056: Sphere02
+    3300058: Sphere02 1
+    3300060: Sphere03
+    3300062: Sphere12
+    3300064: Sphere13
+    4300000: Sphere010
+    4300002: Loft03
+    4300004: Sphere01
+    4300006: Sphere012
+    4300008: ChamferCyl01
+    4300010: ChamferBox01
+    4300012: Sphere02
+    4300014: Sphere014
+    4300016: Sphere015
+    4300018: Sphere016
+    4300020: Cylinder06
+    4300022: Cylinder03
+    4300024: Sphere02
+    4300026: Cylinder07
+    4300028: Cylinder05
+    4300030: Sphere03
+    4300032: Sphere12
+    4300034: Sphere13
+    4300036: Box13
+    4300038: ChamferCyl02
+    4300040: ChamferCyl03
+    4300042: Box11
+    4300044: Box12
+    4300046: Box01
+    4300048: Box04
+    4300050: Box05
+    4300052: Box07
+    4300054: Box08
+    4300056: Box09
+    4300058: Box10
+    4300060: Box02
+    4300062: Box03
+    4300064: Box06
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
