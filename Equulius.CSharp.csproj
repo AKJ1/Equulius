@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\SamoletDvigatel.cs" />
     <Compile Include="Assets\ScriptsParticles\JivotColliderUdar.cs" />
     <Compile Include="Assets\ScriptsParticles\ParticleStar.cs" />
+    <Compile Include="Assets\Scripts\Util\MathExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Fantasy Skybox FREE\Readme\Readme.txt" />

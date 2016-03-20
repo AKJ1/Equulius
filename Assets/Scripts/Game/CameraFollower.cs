@@ -32,7 +32,7 @@
             UpdateSpring();
             ApplyForce();
             HandleView();
-            transform.LookAt(Target.transform);
+//            transform.LookAt(Target.transform);
         }
 #if DEVELOPMENT_BUILD || UNITY_EDITOR
 
@@ -74,11 +74,11 @@
 
         void HandleView()
         {
-            Quaternion originalQt = Quaternion.Lerp(Quaternion.Euler(transform.rotation.eulerAngles), Quaternion.Euler(transform.rotation.eulerAngles.x, Target.transform.localRotation.eulerAngles.y, transform.rotation.eulerAngles.z), .5f);
+            Quaternion originalQt = Quaternion.Lerp(Quaternion.Euler(transform.rotation.eulerAngles.SubvectorXZ()), Quaternion.Euler(new Vector3(Target.transform.rotation.x, Target.transform.rotation.y, Target.transform.rotation.y)), 1f);
             transform.LookAt(Target.transform);
-            transform.rotation = Quaternion.Lerp(originalQt, Quaternion.Slerp(transform.rotation, Quaternion.Euler(5, Target.transform.localRotation.eulerAngles.y, 0), .5f), .23f);
-
-            var desiredPositon = Target.transform.localPosition - (Target.transform.forward * StretchThreshold) + new Vector3(0, CameraHeight, 0);
+            transform.rotation = Quaternion.Lerp(originalQt, Quaternion.Slerp(Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.y)), Quaternion.Euler(Target.transform.rotation.x, 0, 0), 0f), 1f);
+            transform.rotation.SetLookRotation(Target.transform.forward, Target.transform.up);
+            var desiredPositon = Target.transform.localPosition - (Target.transform.forward * StretchThreshold) + (Target.transform.up *  CameraHeight);
             transform.position = Vector3.Lerp(transform.position, desiredPositon, 0.2f);
         }
     }

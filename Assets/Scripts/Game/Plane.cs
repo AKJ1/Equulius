@@ -11,6 +11,7 @@
 
         public Vector2 MoveVector;
         public GameObject Planet;
+        public GameObject PlaneModel;
 
         private Rigidbody rb;
 
@@ -38,6 +39,7 @@
             transform.position = -planeDirection * 160;
             Vector3 surfacePoint = transform.position ; // normal
 
+            Vector3 forward = new Vector3(0,1,1);
             Vector3 tangent;
             Vector3 t1 = Vector3.Cross(surfacePoint, Vector3.forward);
             Vector3 t2 = Vector3.Cross(surfacePoint, Vector3.up);
@@ -49,9 +51,7 @@
             {
                 tangent = t2;
             } 
-
-//            Debug.Log(tangent);
-            Debug.DrawRay(transform.position, tangent, Color.red);
+            
             float tangentControlAngle = Mathf.Tan(surfacePoint.normalized.x) * Mathf.Rad2Deg;
 
             if (Mathf.Abs(MoveVector.x) > 0)
@@ -59,10 +59,8 @@
                 float max = Mathf.PI*35*Mathf.Deg2Rad;
                 float curr = Mathf.Deg2Rad*tangentControlAngle;
                 float num = Mathf.Pow(Mathf.PI, curr/max);
-                
-
-
-                rb.AddForce(transform.right*50 * MoveVector.x);
+            
+                rb.AddForce(transform.right*MoveSpeedX * MoveVector.x);
             }
             
             float tangentAngle = Mathf.Atan2(surfacePoint.normalized.z, surfacePoint.normalized.y)*Mathf.Rad2Deg;
@@ -71,9 +69,13 @@
             Vector3 bodyForwardRotation = transform.forward;
             bodyForwardRotation.y = 0;
             var desiredRotation = Quaternion.Euler(tangentAngle, 0, Mathf.Clamp(-tangentControlAngle,-35f, 35f));
-            var desiredQuatLookRot = Quaternion.LookRotation(Vector3.forward)*desiredRotation;
-            transform.rotation = desiredQuatLookRot;
-            rb.AddForce(transform.forward * 40);
+            Debug.Log(desiredRotation);
+            transform.localRotation = desiredRotation;
+            Debug.Log(rb.velocity.magnitude);
+//            transform.localRotation = Quaternion.LookRotation(-transform.forward, -transform.up);
+//            transform.localRotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 0, transform.rotation.eulerAngles.z);
+
+            rb.AddForce(transform.forward * MoveSpeedZ);
         }
 
         public void MoveXy()
