@@ -9,6 +9,8 @@
         public float MoveSpeedX;
         public float MoveSppedY;
 
+        public float PlaneHeight;
+
         public Vector2 MoveVector;
         public GameObject Planet;
         public GameObject PlaneModel;
@@ -36,7 +38,7 @@
         {
             Vector3 planeDirection = (Planet.transform.position - transform.position).normalized;
             
-            transform.position = -planeDirection * 160;
+            transform.position = -planeDirection * PlaneHeight;
             Vector3 surfacePoint = transform.position ; // normal
 
             Vector3 forward = new Vector3(0,1,1);
@@ -69,9 +71,8 @@
             Vector3 bodyForwardRotation = transform.forward;
             bodyForwardRotation.y = 0;
             var desiredRotation = Quaternion.Euler(tangentAngle, 0, Mathf.Clamp(-tangentControlAngle,-35f, 35f));
-            Debug.Log(desiredRotation);
             transform.localRotation = desiredRotation;
-            Debug.Log(rb.velocity.magnitude);
+
 //            transform.localRotation = Quaternion.LookRotation(-transform.forward, -transform.up);
 //            transform.localRotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 0, transform.rotation.eulerAngles.z);
 

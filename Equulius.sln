@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Equulius.CSharp.Plugins", "Equulius.CSharp.Plugins.csproj", "{42557F8B-F655-831C-31D2-4D542822E7C3}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Equulius.CSharp", "Equulius.CSharp.csproj", "{50046EF2-069E-308C-93CE-508917D7CE94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Equulius.CSharp.Editor", "Equulius.CSharp.Editor.csproj", "{009D0AC8-F572-F76C-C5A3-F1F0F452E15F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +13,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{42557F8B-F655-831C-31D2-4D542822E7C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42557F8B-F655-831C-31D2-4D542822E7C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42557F8B-F655-831C-31D2-4D542822E7C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42557F8B-F655-831C-31D2-4D542822E7C3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{50046EF2-069E-308C-93CE-508917D7CE94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{50046EF2-069E-308C-93CE-508917D7CE94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50046EF2-069E-308C-93CE-508917D7CE94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50046EF2-069E-308C-93CE-508917D7CE94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{009D0AC8-F572-F76C-C5A3-F1F0F452E15F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{009D0AC8-F572-F76C-C5A3-F1F0F452E15F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{009D0AC8-F572-F76C-C5A3-F1F0F452E15F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{009D0AC8-F572-F76C-C5A3-F1F0F452E15F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
