@@ -1,7 +1,6 @@
 ﻿namespace Assets.Scripts.Game
 {
     using UnityEngine; 
-    using UnityEditor;
 
     public class Plane : MonoBehaviour
     {
@@ -62,7 +61,8 @@
                 float curr = Mathf.Deg2Rad*tangentControlAngle;
                 float num = Mathf.Pow(Mathf.PI, curr/max);
             
-                rb.AddForce(transform.right*MoveSpeedX * MoveVector.x);
+                
+                rb.velocity = Vector3.Lerp(rb.velocity, transform.right * MoveSpeedX * MoveVector.x, .2f);
             }
             
             float tangentAngle = Mathf.Atan2(surfacePoint.normalized.z, surfacePoint.normalized.y)*Mathf.Rad2Deg;
@@ -76,7 +76,7 @@
 //            transform.localRotation = Quaternion.LookRotation(-transform.forward, -transform.up);
 //            transform.localRotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 0, transform.rotation.eulerAngles.z);
 
-            rb.AddForce(transform.forward * MoveSpeedZ);
+            rb.velocity = rb.velocity.SubvectorX() + (transform.forward * MoveSpeedZ);
         }
 
         public void MoveXy()

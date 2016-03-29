@@ -27,22 +27,19 @@
         }
 
         // Update is called once per frame
-        void FixedUpdate()
+        void Update()
         {
             UpdateSpring();
             ApplyForce();
             HandleView();
-//            transform.LookAt(Target.transform);
         }
 #if DEVELOPMENT_BUILD || UNITY_EDITOR
 
-        private string dbgstr = "";
-
+        
     #endif         
         void UpdateSpring()
         {
             float diff = (transform.position - Target.transform.position).magnitude;
-            dbgstr = diff.ToString();
             if (Mathf.Abs(stretch) > 0)
             {
                 float sign = Mathf.Sign(stretch);
@@ -76,10 +73,10 @@
         {
             Quaternion originalQt = Quaternion.Lerp(Quaternion.Euler(transform.rotation.eulerAngles.SubvectorXZ()), Quaternion.Euler(new Vector3(Target.transform.rotation.x, Target.transform.rotation.y, Target.transform.rotation.y)), 1f);
             transform.LookAt(Target.transform);
-            transform.rotation = Quaternion.Lerp(originalQt, Quaternion.Slerp(Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.y)), Quaternion.Euler(Target.transform.rotation.x, 0, 0), 0f), 1f);
-            transform.rotation.SetLookRotation(Target.transform.forward, Target.transform.up);
-            var desiredPositon = Target.transform.localPosition - (Target.transform.forward * StretchThreshold) + (Target.transform.up *  CameraHeight);
-            transform.position = Vector3.Lerp(transform.position, desiredPositon, 0.2f);
+            transform.rotation = Quaternion.Lerp(originalQt, Quaternion.Slerp(Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.y)), Quaternion.Euler(Target.transform.rotation.x, 0, Target.transform.rotation.z), 0f), 1f);
+            transform.rotation.SetLookRotation(Target.transform.forward, Vector3.up);
+//            var desiredPositon = transform.position + ((transform.position - Target.transform.up) *  CameraHeight);
+//            transform.position = desiredPositon;
         }
     }
 }
