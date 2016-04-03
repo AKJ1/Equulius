@@ -11,7 +11,7 @@
         public float PlaneHeight;
 
         public Vector2 MoveVector;
-        public GameObject Planet;
+        public GameObject Planet;   
         public GameObject PlaneModel;
 
         private Rigidbody rb;
@@ -62,21 +62,36 @@
                 float num = Mathf.Pow(Mathf.PI, curr/max);
             
                 
-                rb.velocity = Vector3.Lerp(rb.velocity, transform.right * MoveSpeedX * MoveVector.x, .2f);
+//                rb.velocity = Vector3.Lerp(rb.velocity, transform.right * MoveSpeedX * MoveVector.x, .2f);
             }
+
             
             float tangentAngle = Mathf.Atan2(surfacePoint.normalized.z, surfacePoint.normalized.y)*Mathf.Rad2Deg;
 
 
             Vector3 bodyForwardRotation = transform.forward;
             bodyForwardRotation.y = 0;
-            var desiredRotation = Quaternion.Euler(tangentAngle, 0, Mathf.Clamp(-tangentControlAngle,-35f, 35f));
+            Debug.Log(Mathf.Cos(Mathf.Deg2Rad * tangentAngle));
+            var desiredRotation = Quaternion.Euler(tangentAngle , MoveVector.x * 35,  ( MoveVector.x * 35 )+ Mathf.Clamp(-tangentControlAngle,-35f, 35f));
+            var newDesiredRotation = Quaternion.LookRotation(transform.forward + new Vector3(MoveVector.x ,0,0));
+            newDesiredRotation = Quaternion.Euler(tangentAngle, newDesiredRotation.eulerAngles.y, Mathf.Clamp(-tangentControlAngle, -35f, 35f));
+            
             transform.localRotation = desiredRotation;
+//            if (useGUILayout)
+//            {
+//            var axis = Quaternion.LookRotation(transform.forward , transform.up);
+//            transform.localRotation= Quaternion.Euler(axis.eulerAngles.SubvectorZ() + axis.eulerAngles.SubvectorY() + transform.eulerAngles);
+            
+            
+
+//            Debug.Log(rb.velocity.SubvectorX().magnitude);
+                
+//            }
 
 //            transform.localRotation = Quaternion.LookRotation(-transform.forward, -transform.up);
 //            transform.localRotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 0, transform.rotation.eulerAngles.z);
 
-            rb.velocity = rb.velocity.SubvectorX() + (transform.forward * MoveSpeedZ);
+            rb.velocity =  (transform.forward * MoveSpeedZ);
         }
 
         public void MoveXy()

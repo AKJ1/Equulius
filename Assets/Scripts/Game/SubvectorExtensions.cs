@@ -24,7 +24,7 @@ namespace Assets.Scripts.Game
         }
         public static Vector3 SubvectorYZ(this Vector3 vector)
         {
-            return new Vector3(vector.y, vector.z);
+            return new Vector3(0, vector.y, vector.z);
         }
 
 
@@ -35,6 +35,11 @@ namespace Assets.Scripts.Game
         public static Vector3 SubvectorY(this Vector2 vector)
         {
             return new Vector2(0, vector.y);
+        }
+
+        public static Vector3 SubvectorZ(this Vector3 vector)
+        {
+            return new Vector3(0, 0, vector.z);
         }
     }
 }

@@ -111,6 +111,7 @@
     <Compile Include="Assets\Editor\PackageTool.cs" />
     <Compile Include="Assets\Kino Imported\Fringe\Editor\FringeEditor.cs" />
     <Compile Include="Assets\Kino\Bokeh\Editor\BokehEditor.cs" />
+    <Compile Include="Assets\Kino\Obscurance\Editor\ObscuranceEditor.cs" />
     <Compile Include="Assets\Reaktion\Editor\Utility\ConstantMotionEditor.cs" />
     <Compile Include="Assets\Reaktion\Editor\Utility\JitterMotionEditor.cs" />
   </ItemGroup>
@@ -120,6 +121,7 @@
     <None Include="Assets\Fantasy Skybox FREE\Readme\Readme.txt" />
     <None Include="Assets\Kino Imported\Fringe\Shader\Fringe.shader" />
     <None Include="Assets\Kino\Bokeh\Shader\Bokeh.shader" />
+    <None Include="Assets\Kino\Obscurance\Shader\Obscurance.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ChromaticAberrationShader.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\VignettingShader.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableBlur.shader" />

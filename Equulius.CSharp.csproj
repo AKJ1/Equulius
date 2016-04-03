@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.3.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -73,17 +75,31 @@
     <Compile Include="Assets\Fantasy Skybox FREE\Scripts\FSPlayer.cs" />
     <Compile Include="Assets\Kino Imported\Fringe\Fringe.cs" />
     <Compile Include="Assets\Kino\Bokeh\Bokeh.cs" />
+    <Compile Include="Assets\Kino\Obscurance\Obscurance.cs" />
+    <Compile Include="Assets\Kino\Obscurance\Script\PropertyObserver.cs" />
     <Compile Include="Assets\Reaktion\Internal\Perlin.cs" />
     <Compile Include="Assets\Reaktion\Utility\ConstantMotion.cs" />
     <Compile Include="Assets\Reaktion\Utility\JitterMotion.cs" />
     <Compile Include="Assets\Scripts\CameraLookaAt.cs" />
     <Compile Include="Assets\Scripts\Game\CameraFollower.cs" />
+    <Compile Include="Assets\Scripts\Game\GridProp.cs" />
     <Compile Include="Assets\Scripts\Game\Plane.cs" />
+    <Compile Include="Assets\Scripts\Game\Planet.cs" />
+    <Compile Include="Assets\Scripts\Game\PlanetaryProp.cs" />
+    <Compile Include="Assets\Scripts\Game\PlanetDecorator.cs" />
+    <Compile Include="Assets\Scripts\Game\PrefabSpawner.cs" />
+    <Compile Include="Assets\Scripts\Game\PropJitter.cs" />
     <Compile Include="Assets\Scripts\Game\SubvectorExtensions.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
+    <Compile Include="Assets\Scripts\Game\TreeDecorator.cs" />
     <Compile Include="Assets\Scripts\Kubcheta.cs" />
     <Compile Include="Assets\Scripts\NumberData.cs" />
     <Compile Include="Assets\Scripts\PerkaVurtene.cs" />
+    <Compile Include="Assets\Scripts\Pooling\Contracts\IPooledCollection.cs" />
+    <Compile Include="Assets\Scripts\Pooling\MasterPool.cs" />
+    <Compile Include="Assets\Scripts\Pooling\Pool.cs" />
+    <Compile Include="Assets\Scripts\Pooling\PooledCollection.cs" />
+    <Compile Include="Assets\Scripts\Pooling\PooledQueue.cs" />
     <Compile Include="Assets\Scripts\SamoletDvigatel.cs" />
     <Compile Include="Assets\Scripts\Util\MathExtensions.cs" />
     <Compile Include="Assets\ScriptsParticles\JivotColliderUdar.cs" />
@@ -95,6 +111,7 @@
     <None Include="Assets\Fantasy Skybox FREE\Readme\Readme.txt" />
     <None Include="Assets\Kino Imported\Fringe\Shader\Fringe.shader" />
     <None Include="Assets\Kino\Bokeh\Shader\Bokeh.shader" />
+    <None Include="Assets\Kino\Obscurance\Shader\Obscurance.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ChromaticAberrationShader.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\VignettingShader.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableBlur.shader" />

@@ -1,4 +1,7 @@
-﻿namespace Assets.Scripts.Game
+﻿using System.Collections;
+using UnityEditor;
+
+namespace Assets.Scripts.Game
 {
     using UnityEngine;
 
@@ -12,25 +15,61 @@
 
         public PropType Type;
 
+        public TreeDecorator TreeDecorator;
+
         public bool WithChildren;
+
+        private bool canSpawn = false;
 
         public void Start()
         {
+            canSpawn = true;
+        }
+
+        IEnumerator TimeOutSpawn()
+        {
+            while (!canSpawn)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            OnSpawn();
         }
 
         public void OnSpawn()
         {
+            
+            if (!canSpawn)
+            {
+                StartCoroutine(TimeOutSpawn());
+                return;
+            }
             RotateAwayFromPlanet(gameObject);
             PositionOnPlanetSurface(gameObject);
+
 
             if (WithChildren)
             {
                 for (int i = 0; i < transform.childCount; i++)
                 {
 //                    Debug.Log("CHILD!!!");
-                    RotateAwayFromPlanet(transform.GetChild(i).gameObject);
-                    PositionOnPlanetSurface(transform.GetChild(i).gameObject);
+//                    RotateAwayFromPlanet(transform.GetChild(i).gameObject);
+//                    PositionOnPlanetSurface(transform.GetChild(i).gameObject);
+                    var childProp = transform.GetChild(i).GetComponent<PlanetaryProp>();
+                    childProp.PlanetParent = PlanetParent;
+                    childProp.OnSpawn();
                 }
+            }
+            
+            var jitter = gameObject.GetComponent<PropJitter>();
+            if (jitter != null)
+            {
+                jitter.Jitter();
+            }
+
+            var treeDeco = transform.GetComponent<TreeDecorator>();
+            if (treeDeco != null)
+            {
+                treeDeco.Decorate();
             }
         }
 
@@ -55,9 +94,12 @@
             
             offset *= PlanetParent.transform.localScale.x;
 
-//            Debug.Log(offset);
-//            Debug.Log(DistanceOffset);
-            go.transform.position = ( go.transform.position - PlanetParent.transform.position).normalized * (offset + go.GetComponent<PlanetaryProp>().DistanceOffset);
+            if (go.GetComponent<PlanetaryProp>() != null)
+            {
+
+                offset += go.GetComponent<PlanetaryProp>().DistanceOffset;
+            }
+            go.transform.position = ( go.transform.position - PlanetParent.transform.position).normalized * (offset);
         }
 
         public void ConformChildren()

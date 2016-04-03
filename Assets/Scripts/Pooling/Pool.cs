@@ -33,6 +33,8 @@
 
             this.capacity = capacity;
 
+            this.preWarmCapacity = capacity;
+
             DefaultPrimitive = defaultPrimitive;
             
 
