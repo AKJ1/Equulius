@@ -1,4 +1,8 @@
-﻿namespace Assets.Scripts.Game
+﻿using System;
+using System.Collections;
+using System.Net.NetworkInformation;
+
+namespace Assets.Scripts.Game
 {
     using UnityEngine; 
 
@@ -6,19 +10,33 @@
     {
         public float MoveSpeedZ;
         public float MoveSpeedX;
-        public float MoveSppedY;
+        public float MoveSpeedY;
 
         public float PlaneHeight;
-
+        public float PlaneYFreedom = 50f;
+        public float PlaneXFreedom = 35;
+        public float StartPlaneHeight;
+        private float extraXRotation = 0;
+        private float extraYRotation = 0;
         public Vector2 MoveVector;
         public GameObject Planet;   
         public GameObject PlaneModel;
+        public GameObject ForwardDirectionHelper;
+
 
         private Rigidbody rb;
+
+        public Vector3 SurfacePoint;
 
         public void Start()
         {
             rb = transform.GetComponent<Rigidbody>();
+
+            Vector3 planeDirection = (Planet.transform.position - transform.position).normalized;
+
+            Vector3 surfacePoint = -planeDirection * PlaneHeight; // normal
+            StartPlaneHeight = PlaneHeight;
+            transform.position = surfacePoint;
         }
 
         public void Update()
@@ -33,70 +51,94 @@
             MoveVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         }
 
+        public void ConsumePowerup(PowerupType type)
+        {
+            switch (type)
+            {
+                case PowerupType.Speed:
+                    break;
+                case PowerupType.Score:
+                    MoveSpeedZ += 25f;
+                    break;
+                case PowerupType.Shield:
+                    break;
+    
+            }
+        }
+
         public void Fly()
         {
             Vector3 planeDirection = (Planet.transform.position - transform.position).normalized;
-            
-            transform.position = -planeDirection * PlaneHeight;
-            Vector3 surfacePoint = transform.position ; // normal
 
-            Vector3 forward = new Vector3(0,1,1);
-            Vector3 tangent;
-            Vector3 t1 = Vector3.Cross(surfacePoint, Vector3.forward);
-            Vector3 t2 = Vector3.Cross(surfacePoint, Vector3.up);
-            if (t1.magnitude > t2.magnitude)
-            {
-                tangent = t1;
-            }
-            else
-            {
-                tangent = t2;
-            } 
-            
-            float tangentControlAngle = Mathf.Tan(surfacePoint.normalized.x) * Mathf.Rad2Deg;
+            PlaneHeight += MoveVector.y*MoveSpeedY*Time.deltaTime;
+            PlaneHeight = Mathf.Clamp(PlaneHeight, StartPlaneHeight - PlaneYFreedom, StartPlaneHeight + PlaneYFreedom);
 
-            if (Mathf.Abs(MoveVector.x) > 0)
-            {
-                float max = Mathf.PI*35*Mathf.Deg2Rad;
-                float curr = Mathf.Deg2Rad*tangentControlAngle;
-                float num = Mathf.Pow(Mathf.PI, curr/max);
-            
-                
-//                rb.velocity = Vector3.Lerp(rb.velocity, transform.right * MoveSpeedX * MoveVector.x, .2f);
-            }
+            Vector3 surfacePoint = -planeDirection*PlaneHeight; // normal
+            SurfacePoint = surfacePoint;
 
-            
+            extraXRotation += -MoveVector.y*PlaneXFreedom*(Time.deltaTime*MoveSpeedY);
+            extraXRotation = Mathf.Lerp(extraXRotation, -MoveVector.y*PlaneXFreedom*(Time.deltaTime*MoveSpeedY), Time.deltaTime*5);
+            extraXRotation = Mathf.Clamp(extraXRotation, -PlaneXFreedom, PlaneXFreedom);
+
+
+            extraYRotation += -MoveVector.x*PlaneYFreedom*(Time.deltaTime*MoveSpeedY);
+            extraYRotation = Mathf.Lerp(extraYRotation, -MoveVector.x*-PlaneYFreedom*(Time.deltaTime*MoveSpeedY), Time.deltaTime*5);
+            extraYRotation = Mathf.Clamp(extraYRotation, -PlaneYFreedom, PlaneYFreedom);
+
+            float tangentControlAngle = Mathf.Tan(surfacePoint.normalized.x)*Mathf.Rad2Deg;
             float tangentAngle = Mathf.Atan2(surfacePoint.normalized.z, surfacePoint.normalized.y)*Mathf.Rad2Deg;
+            transform.localRotation = Quaternion.AngleAxis(extraYRotation, planeDirection)*Quaternion.AngleAxis(tangentAngle + extraXRotation, Vector3.right)*Quaternion.AngleAxis(Mathf.Clamp(-tangentControlAngle, -35f, 35f), Vector3.forward);
 
 
-            Vector3 bodyForwardRotation = transform.forward;
-            bodyForwardRotation.y = 0;
-            Debug.Log(Mathf.Cos(Mathf.Deg2Rad * tangentAngle));
-            var desiredRotation = Quaternion.Euler(tangentAngle , MoveVector.x * 35,  ( MoveVector.x * 35 )+ Mathf.Clamp(-tangentControlAngle,-35f, 35f));
-            var newDesiredRotation = Quaternion.LookRotation(transform.forward + new Vector3(MoveVector.x ,0,0));
-            newDesiredRotation = Quaternion.Euler(tangentAngle, newDesiredRotation.eulerAngles.y, Mathf.Clamp(-tangentControlAngle, -35f, 35f));
-            
-            transform.localRotation = desiredRotation;
-//            if (useGUILayout)
-//            {
-//            var axis = Quaternion.LookRotation(transform.forward , transform.up);
-//            transform.localRotation= Quaternion.Euler(axis.eulerAngles.SubvectorZ() + axis.eulerAngles.SubvectorY() + transform.eulerAngles);
-            
-            
+            Vector3 currentVelocity = rb.velocity;
+            Vector3 wantedVelocity = Vector3.Lerp(currentVelocity, transform.forward*MoveSpeedZ, Time.deltaTime*4); // + ((transform.right * MoveSpeedX * MoveVector.x) * Time.deltaTime* 10);
 
-//            Debug.Log(rb.velocity.SubvectorX().magnitude);
-                
-//            }
+            rb.velocity = wantedVelocity;
+        }
 
-//            transform.localRotation = Quaternion.LookRotation(-transform.forward, -transform.up);
-//            transform.localRotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 0, transform.rotation.eulerAngles.z);
+        public void OnCollisionEnter(Collision col)
+        {
+            if (col.transform.tag == "PlanetaryProp")
+            {
+                Debug.Log("Plane Hit, maytey");
+            }
+            else if (col.transform.tag == "Powerup")
+            {
+                ConsumePowerup(col.transform.GetComponent<Powerup>().Type);
+                col.transform.GetComponent<Powerup>().enabled = false;
+                Destroy(col.transform, 3);
+            }
+        }
 
-            rb.velocity =  (transform.forward * MoveSpeedZ);
+        public void OnTriggerEnter(Collider col)
+        {
+            Debug.Log(col.transform.name);
+            if (col.transform.tag == "Powerup")
+            {
+                ConsumePowerup(col.transform.GetComponent<Powerup>().Type);
+                col.transform.GetComponent<Powerup>().enabled = false;
+
+                StartCoroutine(KillCoin(col.gameObject));
+            }
+        }
+
+        IEnumerator KillCoin(GameObject coin)
+        {
+            float animationTime = .3f;
+            float elapsed = 0;
+            Vector3 scale = coin.transform.localScale;
+
+            while (true)
+            {
+                elapsed += Time.deltaTime;
+                coin.transform.localScale = Vector3.Lerp(scale, Vector3.zero, elapsed/animationTime);
+                yield return new WaitForEndOfFrame();
+            }
+            Destroy(coin);
         }
 
         public void MoveXy()
         {
         }
-        
     }
 }

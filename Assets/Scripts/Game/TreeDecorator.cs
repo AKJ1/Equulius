@@ -10,14 +10,19 @@
 
         public TreeStyle Style;
 
-        public GameObject Crown;
+        public GameObject[] CrownElements;
 
         public void Decorate()
         {
             var wantedMaterials = Style == TreeStyle.Warm
                 ? WarmMaterials
                 : Style == TreeStyle.Cold ? ColdMaterials : null;
-            Crown.GetComponent<Renderer>().material = wantedMaterials[Random.Range(0, wantedMaterials.Length)];
+            int rng = Random.Range(0, wantedMaterials.Length);
+            foreach (var element in CrownElements)
+            {
+                element.GetComponent<Renderer>().material = wantedMaterials[rng];
+            }
+            
         }
     }
 

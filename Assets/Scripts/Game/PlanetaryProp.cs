@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using UnityEditor;
+
 
 namespace Assets.Scripts.Game
 {
@@ -94,9 +94,9 @@ namespace Assets.Scripts.Game
             
             offset *= PlanetParent.transform.localScale.x;
 
+
             if (go.GetComponent<PlanetaryProp>() != null)
             {
-
                 offset += go.GetComponent<PlanetaryProp>().DistanceOffset;
             }
             go.transform.position = ( go.transform.position - PlanetParent.transform.position).normalized * (offset);
@@ -126,5 +126,6 @@ public enum PropType
     Cloud,
     Rock,
     Mountain,
-    Obstacle
+    Obstacle,
+    BoundingElement
 }

@@ -1,4 +1,6 @@
-﻿namespace Assets.Scripts.Util
+﻿using Assets.Scripts.Game;
+
+namespace Assets.Scripts.Util
 {
     using UnityEngine;
     using System.Collections.Generic;
@@ -61,6 +63,10 @@
         /// <param name="item">The Object to deactivate</param>
         public void Deactivate(T item)
         {
+            item.transform.rotation = DefaultPrimitive.transform.rotation;
+            item.transform.position = DefaultPrimitive.transform.position;
+            item.transform.localScale = DefaultPrimitive.transform.localScale;
+
             InvokeReturnObject(item);
 
             item.gameObject.SetActive(false);
@@ -79,6 +85,12 @@
 //            Debug.Log(inactiveObjects.Count);
 //            Debug.Log(activeObjects.Count);
             T comp = inactiveObjects.Count <= 0 ? GeneratePrimitive() : inactiveObjects.Pop();
+            var membership = comp.GetComponent<PoolMember>();
+            if (membership == null)
+            {
+                var newMembership = comp.gameObject.AddComponent<PoolMember>();
+                newMembership.SetInfo(() => Deactivate(comp));
+            }
             comp.gameObject.SetActive(true);
             activeObjects.Add(comp);
             InvokeGetObject(comp);

@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.3.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -82,17 +80,29 @@
     <Compile Include="Assets\Reaktion\Utility\JitterMotion.cs" />
     <Compile Include="Assets\Scripts\CameraLookaAt.cs" />
     <Compile Include="Assets\Scripts\Game\CameraFollower.cs" />
+    <Compile Include="Assets\Scripts\Game\CoinSpawnLocation.cs" />
+    <Compile Include="Assets\Scripts\Game\DataInitializer.cs" />
     <Compile Include="Assets\Scripts\Game\GridProp.cs" />
     <Compile Include="Assets\Scripts\Game\Plane.cs" />
     <Compile Include="Assets\Scripts\Game\Planet.cs" />
-    <Compile Include="Assets\Scripts\Game\PlanetaryProp.cs" />
     <Compile Include="Assets\Scripts\Game\PlanetDecorator.cs" />
+    <Compile Include="Assets\Scripts\Game\PlanetaryExterminator.cs" />
+    <Compile Include="Assets\Scripts\Game\PlanetaryProp.cs" />
+    <Compile Include="Assets\Scripts\Game\PoolMember.cs" />
+    <Compile Include="Assets\Scripts\Game\Powerup.cs" />
     <Compile Include="Assets\Scripts\Game\PrefabSpawner.cs" />
     <Compile Include="Assets\Scripts\Game\PropJitter.cs" />
+    <Compile Include="Assets\Scripts\Game\PropSpacer.cs" />
+    <Compile Include="Assets\Scripts\Game\SpinnyComponent.cs" />
+    <Compile Include="Assets\Scripts\Game\StaticData.cs" />
     <Compile Include="Assets\Scripts\Game\SubvectorExtensions.cs" />
-    <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\Game\TreeDecorator.cs" />
+    <Compile Include="Assets\Scripts\GameController.cs" />
+    <Compile Include="Assets\Scripts\Gui2.cs" />
+    <Compile Include="Assets\Scripts\GuiManager.cs" />
+    <Compile Include="Assets\Scripts\GuiTeren.cs" />
     <Compile Include="Assets\Scripts\Kubcheta.cs" />
+    <Compile Include="Assets\Scripts\NovoDvijenie.cs" />
     <Compile Include="Assets\Scripts\NumberData.cs" />
     <Compile Include="Assets\Scripts\PerkaVurtene.cs" />
     <Compile Include="Assets\Scripts\Pooling\Contracts\IPooledCollection.cs" />
@@ -101,6 +111,10 @@
     <Compile Include="Assets\Scripts\Pooling\PooledCollection.cs" />
     <Compile Include="Assets\Scripts\Pooling\PooledQueue.cs" />
     <Compile Include="Assets\Scripts\SamoletDvigatel.cs" />
+    <Compile Include="Assets\Scripts\Teren\CifriTerenDve.cs" />
+    <Compile Include="Assets\Scripts\Teren\KubchetaTeren.cs" />
+    <Compile Include="Assets\Scripts\Teren\SamoletTeren.cs" />
+    <Compile Include="Assets\Scripts\Teren\TerenDurveta.cs" />
     <Compile Include="Assets\Scripts\Util\MathExtensions.cs" />
     <Compile Include="Assets\ScriptsParticles\JivotColliderUdar.cs" />
     <Compile Include="Assets\ScriptsParticles\ParticleStar.cs" />

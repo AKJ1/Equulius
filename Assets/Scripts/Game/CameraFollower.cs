@@ -22,12 +22,10 @@
         [Range(1,20)]
         public float CameraFirmness;
 
-
-        private Rigidbody cameraBody;
         // Use this for initialization
         void Start()
         {
-            cameraBody = transform.GetComponent<Rigidbody>();
+        
         }
 
         // Update is called once per frame

@@ -12,10 +12,21 @@
         public Dictionary<PropType, List<Pool<PlanetaryProp>>> PropPools;
 
         public List<PlanetaryProp> Props;
+
+        public GameObject Player;
         
         public BoxCollider Spawner;
 
         public BoxCollider Deleter;
+
+        [Range(0.05f, 0.4f)]
+        public float WallsDistance;
+
+        [Range(0.05f, 0.4f)]
+        public float MaxWallsSerpentine;
+
+        [Range(0.25f, 4f)]
+        public float SerpentineFrequency;
 
         private float spawnTime = .4f;
 
@@ -34,7 +45,7 @@
                 else
                 {
                     PropPools.Add(prop.Type, new List<Pool<PlanetaryProp>>());
-
+                    
                     var newPool = new Pool<PlanetaryProp>(prop.gameObject, 64, true);
 
                     PropPools[prop.Type].Add(newPool);
@@ -43,7 +54,7 @@
             }
 
 //            StartCoroutine(DecorateEntirePlanet());
-            SpawnBoudningMountains(800);
+            StartCoroutine(SpawnBoudningMountains(800));
         }
 
         IEnumerator DecorateEntirePlanet()
@@ -80,30 +91,45 @@
             transform.localRotation = desiredRotation;
         }
 
-        private void SpawnBoudningMountains(int iterations = 48)
+        private IEnumerator SpawnBoudningMountains(int iterations = 48)
         {
-            float deltaMinPerIteration = .004f;
-            float deltaMaxPerIteration = .008f;
-            float max = .22f;
+            float deltaMinPerIteration = .004f * SerpentineFrequency;
+            float deltaMaxPerIteration = .008f * SerpentineFrequency;
+            float max = MaxWallsSerpentine;
             float start = 0;
             float multiplier = 1;
 
             float currentSide = 1;
 
             float activeExtent = start;
-            for (int i = 0; i < iterations; i++)
+            while (true)
             {
-                
-//                Debug.Log(activeExtent);
-                if (Mathf.Abs(activeExtent) >= max)
+                while(Vector3.Distance(transform.position, Player.transform.position) < TargetPlanet.transform.localScale.x/1.5)
                 {
-                    activeExtent = max*Mathf.Sign(activeExtent);
-                    multiplier *= -1;
+                    if (Mathf.Abs(activeExtent) >= max)
+                    {
+                        activeExtent = max*Mathf.Sign(activeExtent);
+                        multiplier *= -1;
+                    }
+                    activeExtent += (Random.Range(deltaMinPerIteration, deltaMaxPerIteration)*multiplier);
+                    MoveForward(ProgressAmountByIterations(iterations));
+                    SpawnProp(PropType.BoundingElement,
+                        PointByExtent(WallsDistance*currentSide, transform.position, activeExtent));
+                    currentSide *= -1;
+                    if (Random.Range(0,1f) < .3f)
+                    {
+                        SpawnProp(PropType.Cloud, PointByExtent(Random.Range(-(max + .2f), (max + .2f)), transform.position, 0));
+                    }
+                    if (Random.Range(0, 1f) < .05f)
+                    {
+//                        SpawnProp(PropType.Obstacle, PointByExtent(Random.Range(-(max - .1f), (max + .1f)), transform.position, activeExtent));
+                    }
+                    if (Random.Range(0, 1f) < .55f)
+                    {
+                        SpawnProp(PropType.Tree, PointByExtent(Random.Range(-(max + .1f), (max + .1f)), transform.position, activeExtent));
+                    }
                 }
-                activeExtent += (Random.Range(deltaMinPerIteration, deltaMaxPerIteration) * multiplier);
-                MoveForward(ProgressAmountByIterations(iterations));
-                SpawnProp(PropType.Mountain, PointByExtent(.4f * currentSide, transform.position, activeExtent));
-                currentSide *= -1;
+                yield return new WaitForEndOfFrame();
             }
         }
 	
@@ -111,7 +137,7 @@
         void Update () {
         }
 
-        void SpawnProp(PropType type, Vector3 position = default(Vector3))
+        void SpawnProp(PropType type, Vector3 position = default(Vector3), float extent = 1, float extentOffset = 0)
         {
             int randomPool =Random.Range(0, PropPools[type].Count);
             PlanetaryProp newProp = PropPools[type][randomPool].Get();
@@ -119,7 +145,7 @@
             newProp.PlanetParent = TargetPlanet;
             if (position == default(Vector3))
             {
-                newProp.transform.position = RandomPointOnPlanet(transform.position);
+                newProp.transform.position = RandomPointOnPlanet(transform.position,extent, extentOffset);
             }
             else
             {
@@ -134,7 +160,7 @@
 
         
 
-        Vector3 RandomPointOnPlanet(Vector3 Midpoint, float maxExtent = 1)
+        Vector3 RandomPointOnPlanet(Vector3 Midpoint, float maxExtent = 1, float extentOffset = 0)
         {
             Vector3 point1 = TargetPlanet.transform.position + new Vector3(-TargetPlanet.transform.localScale.x / 2, 0, 0);
             Vector3 point2 = TargetPlanet.transform.position + new Vector3(TargetPlanet.transform.localScale.x / 2, 0, 0);
