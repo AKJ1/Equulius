@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+
 using System.Collections;
 
 public class SamoletDvigatel : MonoBehaviour
@@ -15,7 +17,13 @@ public class SamoletDvigatel : MonoBehaviour
     public GameObject particlesMinus;
     public GameObject colliderZaUdar;
     public bool useGravity;
-    
+    public GameObject guiTeren;
+
+    void Update()
+    {
+        guiTeren.GetComponent<Text>().text = string.Format(" {0}", score.ToString());
+    }
+
 
     void FixedUpdate()
     {
